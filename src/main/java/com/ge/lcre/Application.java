@@ -179,16 +179,24 @@ public class Application {
 		//Limit results
 		//
 		//Ordering Results
-		for(Book b: repository.findFirstByOrderByPageCountDesc()){
+//		for(Book b: repository.findFirstByOrderByPageCountDesc()){
+//			System.out.println(b);
+//		}
+//		for(Book b: repository.findTop5ByOrderByPriceDesc()){
+//			System.out.println(b);
+//		}
+//		for(Book b: repository.findByTitleContainingOrderByTitleAsc("%a%")){
+//			System.out.println(b);
+//		}
+//		for(Book b: repository.findByTitleContainingOrderByTitleAsc("Animal")){
+//			System.out.println(b);
+//		}
+
+		//Traversing an entity
+		for(Book b: repository.findByAuthorFirstName("William")) {
 			System.out.println(b);
 		}
-		for(Book b: repository.findTop5ByOrderByPriceDesc()){
-			System.out.println(b);
-		}
-		for(Book b: repository.findByTitleContainingOrderByTitleAsc("%a%")){
-			System.out.println(b);
-		}
-		for(Book b: repository.findByTitleContainingOrderByTitleAsc("Animal")){
+		for(Book b: repository.findByAuthor_CountryContaining("%United %")){
 			System.out.println(b);
 		}
 	}

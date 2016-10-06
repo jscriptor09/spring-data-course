@@ -53,5 +53,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     public List<Book> findTop5ByTitleOrderByPriceAsc(String title);
 
     //
-    //
+    //Traversin Nested Properties
+    public List<Book> findByAuthorFirstName(String firstName);
+    public List<Book> findByAuthor_Country(String country); // the _ tells Spring Data to look at author field in Book first and the traverse to County
+    public List<Book> findByAuthor_CountryContaining(String country); // the _ tells Spring Data to look at author field in Book first and the traverse to County
 }
