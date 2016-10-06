@@ -27,6 +27,10 @@ public class Book {
     @Column(name = "PAGE_COUNT")
     private int pageCount;
 
+    @ManyToOne
+    @JoinColumn(name="AUTHOR_ID")
+    private Author author;
+
     public Long getBookId() {
         return bookId;
     }
@@ -67,6 +71,14 @@ public class Book {
         this.price = price;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     public Book() {
     }
 
@@ -85,6 +97,7 @@ public class Book {
                 ", publishDate=" + publishDate +
                 ", price=" + price +
                 ", pageCount=" + pageCount +
+                ", Author=" + author +
                 '}';
     }
 }

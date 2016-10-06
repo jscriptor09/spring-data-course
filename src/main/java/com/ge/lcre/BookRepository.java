@@ -51,4 +51,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     public List<Book> findTop5ByOrderByPriceDesc();
     public List<Book> findTop5ByTitleOrderByPriceAsc(String title);
+
+    //
+    //
 }
