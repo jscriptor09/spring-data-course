@@ -1,6 +1,8 @@
 package com.ge.lcre;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -72,4 +74,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     //
     //Pageable
     public List<Book> findByPageCountGreaterThan(int pageCount, Pageable pageable);
+    //
+    //Sorting ... a 2nd way
+    //public List<Book> findByPageCountGreaterThan(int pageCount, Sort sort);
+    //
+    //Return Collection
+    //public List<Book> findByPageCountGreaterThan(int pageCount, Sort sort);
+    //public Collection<Book> findByPageCountGreaterThan(int pageCount, Sort sort);
+    //public Iterable<Book> findByPageCountGreaterThan(int pageCount, Sort sort);
+    //public Page<Book> findByPageCountGreaterThan(int pageCount, Sort sort, Pageable pageable);
+    public Slice<Book> findByPageCountGreaterThan(int pageCount, Sort sort, Pageable pageable);
 }

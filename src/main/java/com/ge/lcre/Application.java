@@ -3,6 +3,8 @@ package com.ge.lcre;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 
 import java.text.ParseException;
 
@@ -236,6 +238,30 @@ public class Application {
 		//
 		//Pageing a 2nd way ... add paging to interface ... better way
 		for(Book b: repository.findByPageCountGreaterThan(150,new PageRequest(1,3))) {
+			System.out.println(b);
+		}
+		//
+		//Sorting
+		for(Book b: repository.findAll(new Sort(Sort.Direction.DESC,"pageCount"))) {
+			System.out.println(b);
+		}
+		for(Book b: repository.findAll(new Sort(Sort.Direction.ASC,"author.lastName","pageCount"))) {
+			System.out.println(b);
+		}
+		for(Book b: repository.findAll(new Sort(Sort.Direction.ASC,"author.lastName").and(new Sort(Sort.Direction.DESC,"pageCount")))) {
+			System.out.println(b);
+		}
+		//
+		//Sorting , 2nd way ... using Repo Signature
+//		for(Book b: repository.findByPageCountGreaterThan(220,new Sort(Sort.Direction.ASC,"author.firstName"))) {
+//			System.out.println(b);
+//		}
+		//
+		//Paging
+		//Page page = repository.findByPageCountGreaterThan(220, new Sort(Sort.Direction.DESC,"pageCount"), new PageRequest(1,3));
+		Slice slice = repository.findByPageCountGreaterThan(220, new Sort(Sort.Direction.DESC,"pageCount"), new PageRequest(1,3));
+		//slice.hasNext()   /// use to iterate
+		for(Book b: repository.findByPageCountGreaterThan(220, new PageRequest(1,3))) {
 			System.out.println(b);
 		}
 	}
