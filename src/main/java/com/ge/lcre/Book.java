@@ -9,6 +9,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Book")
+@NamedQueries({@NamedQuery(name="Book.queryOne", query="select b from Book b"),
+        @NamedQuery(name="Book.queryTwo", query="select b from Book b where b.pageCount > ?1"),
+        @NamedQuery(name="Book.queryThree", query="select b from Book b where b.title = :title")})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

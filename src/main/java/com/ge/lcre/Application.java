@@ -2,6 +2,7 @@ package com.ge.lcre;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.PageRequest;
 
 import java.text.ParseException;
 
@@ -193,10 +194,48 @@ public class Application {
 //		}
 
 		//Traversing an entity
-		for(Book b: repository.findByAuthorFirstName("William")) {
+//		for(Book b: repository.queryOne()) {
+//			System.out.println(b);
+//		}
+//		for(Book b: repository.queryTwo(200)){
+//			System.out.println(b);
+//		}
+//
+//		for(Book b: repository.queryThree("Animal Farm")){
+//			System.out.println(b);
+//		}
+
+		//
+		//Paging ... one way
+		// (1st page ... 3 items per page)
+		for(Book b: repository.findAll(new PageRequest(0,3))) {
 			System.out.println(b);
 		}
-		for(Book b: repository.findByAuthor_CountryContaining("%United %")){
+		//2nd page
+		for(Book b: repository.findAll(new PageRequest(1,3))) {
+			System.out.println(b);
+		}
+		//3rd page
+		for(Book b: repository.findAll(new PageRequest(2,3))) {
+			System.out.println(b);
+		}
+		//
+		//Paging ... 2nd way.. add a method to the intergace with pagable
+		// (1st page ... 3 items per page)
+		for(Book b: repository.findAll(new PageRequest(0,3))) {
+			System.out.println(b);
+		}
+		//2nd page
+		for(Book b: repository.findAll(new PageRequest(1,3))) {
+			System.out.println(b);
+		}
+		//3rd page
+		for(Book b: repository.findAll(new PageRequest(2,3))) {
+			System.out.println(b);
+		}
+		//
+		//Pageing a 2nd way ... add paging to interface ... better way
+		for(Book b: repository.findByPageCountGreaterThan(150,new PageRequest(1,3))) {
 			System.out.println(b);
 		}
 	}

@@ -1,6 +1,8 @@
 package com.ge.lcre;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -57,4 +59,17 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     public List<Book> findByAuthorFirstName(String firstName);
     public List<Book> findByAuthor_Country(String country); // the _ tells Spring Data to look at author field in Book first and the traverse to County
     public List<Book> findByAuthor_CountryContaining(String country); // the _ tells Spring Data to look at author field in Book first and the traverse to County
+    //
+    //JPQL
+    //@Query("select b from Book b")  // made named query ... don't use this approach
+    public List<Book> queryOne();
+
+    //@Query("Select b from Book b where b.pageCount > ?1")  // made named query ... don't use this approach
+    public List<Book> queryTwo(int pageCount);
+
+    //@Query("Select b from Book b where b.title = :title")  // made named query ... don't use this approach
+    public List<Book> queryThree(@Param("title") String title);
+    //
+    //Pageable
+    public List<Book> findByPageCountGreaterThan(int pageCount, Pageable pageable);
 }
